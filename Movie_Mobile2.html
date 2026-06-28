@@ -2,16 +2,15 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>ReoReoMovie</title>
+<title>YouTubeリンク集</title>
 
 <style>
-
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
     font-family:sans-serif;
 }
 
@@ -19,59 +18,39 @@ body{
     background:#f5f5f5;
 }
 
-/* タイトル */
-header{
-    background:#1976d2;
-    color:white;
-    text-align:center;
-    padding:15px;
-    font-size:22px;
-    font-weight:bold;
-}
-
-/* カテゴリ */
 #category{
     display:flex;
-    overflow-x:auto;
-    background:white;
+    background:#ffffff;
     border-bottom:1px solid #ccc;
     position:sticky;
     top:0;
 }
 
 #category button{
-    flex:none;
-    padding:15px 20px;
+    flex:1;
+    padding:15px;
     border:none;
-    background:white;
+    background:#fff;
     font-size:16px;
-    cursor:pointer;
 }
 
 #category button.active{
-    background:#1976d2;
-    color:white;
+    background:#d32f2f;
+    color:#fff;
 }
 
-/* メイン */
 main{
     padding:15px;
 }
 
-/* カテゴリタイトル */
-h2{
-    margin-bottom:15px;
-}
-
-/* リンクカード */
-.link{
-    background:white;
-    margin-bottom:12px;
+.card{
+    background:#fff;
     border-radius:10px;
-    box-shadow:0 2px 6px rgba(0,0,0,.15);
+    margin-bottom:12px;
+    box-shadow:0 2px 5px rgba(0,0,0,.15);
 }
 
-.link a{
+.card a{
     display:block;
     padding:18px;
     text-decoration:none;
@@ -79,103 +58,82 @@ h2{
     font-size:18px;
 }
 
-.link a:hover{
-    background:#eeeeee;
+.card small{
+    display:block;
+    color:#777;
+    margin-top:5px;
 }
-
 </style>
-
 </head>
+
 <body>
 
 <div id="category"></div>
 
 <main>
-    <h2 id="title"></h2>
     <div id="links"></div>
 </main>
 
 <script>
 
-const data = {
+const data={
 
-"U-12リーグ2026前期":[
+"前期":[
     {
-        name:"Google",
-        url:"https://www.google.com"
+        title:"第1回 オリエンテーション",
+        url:"https://www.youtube.com/watch?v=xxxxxxxx"
     },
     {
-        name:"GitHub",
-        url:"https://github.com"
+        title:"第2回 基礎講義",
+        url:"https://www.youtube.com/watch?v=yyyyyyyy"
     },
     {
-        name:"社内ポータル",
-        url:"#"
+        title:"第3回 演習",
+        url:"https://www.youtube.com/watch?v=zzzzzzzz"
     }
 ],
 
-"U-12リーグ2026後期":[
+"後期":[
     {
-        name:"2026.5.31 第1節 vs白根ジャガーズ",
-        url:"https://youtu.be/wzfKPcLXXeA"
+        title:"第1回 応用編",
+        url:"https://www.youtube.com/watch?v=aaaaaaaa"
     },
     {
-        name:"2026.6.28 第2節 vsFC早通",
-        url:"https://youtu.be/xhej322n_Vg"
-    }
-    {
-        name:"2026.6.28 第2節 vsUNITE 2nd",
-        url:"https://youtu.be/v_3S8DJZmCg"
+        title:"第2回 実践",
+        url:"https://www.youtube.com/watch?v=bbbbbbbb"
     }
 ],
 
 "その他":[
     {
-        name:"YouTube",
-        url:"https://youtube.com"
+        title:"補足資料",
+        url:"https://www.youtube.com/watch?v=cccccccc"
     },
     {
-        name:"Amazon",
-        url:"https://amazon.co.jp"
-    }
-],
-
-"勉強":[
-    {
-        name:"Qiita",
-        url:"https://qiita.com"
-    },
-    {
-        name:"Zenn",
-        url:"https://zenn.dev"
+        title:"Q&A",
+        url:"https://www.youtube.com/watch?v=dddddddd"
     }
 ]
 
 };
 
-const categoryDiv=document.getElementById("category");
-const title=document.getElementById("title");
+const category=document.getElementById("category");
 const links=document.getElementById("links");
 
-function showCategory(name){
-
-    title.textContent=name;
+function show(name){
 
     links.innerHTML="";
 
     data[name].forEach(item=>{
 
-        const div=document.createElement("div");
-        div.className="link";
-
-        div.innerHTML=`
-        <a href="${item.url}" target="_blank">
-            ${item.name}
-        </a>
+        links.innerHTML+=`
+        <div class="card">
+            <a href="${item.url}" target="_blank">
+                📺 ${item.title}
+                <small>YouTubeを見る</small>
+            </a>
+        </div>
         `;
-
-        links.appendChild(div);
-
     });
 
     document.querySelectorAll("#category button").forEach(btn=>{
@@ -184,27 +142,20 @@ function showCategory(name){
             btn.classList.add("active");
         }
     });
-
 }
 
-Object.keys(data).forEach((name,index)=>{
+Object.keys(data).forEach((name,i)=>{
 
     const btn=document.createElement("button");
     btn.textContent=name;
+    btn.onclick=()=>show(name);
 
-    btn.onclick=()=>{
-        showCategory(name);
-    };
+    if(i==0) btn.classList.add("active");
 
-    if(index===0){
-        btn.classList.add("active");
-    }
-
-    categoryDiv.appendChild(btn);
-
+    category.appendChild(btn);
 });
 
-showCategory(Object.keys(data)[0]);
+show("前期");
 
 </script>
 
