@@ -2,8 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YouTubeリンク集</title>
 
 <style>
@@ -11,57 +10,80 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 body{
-    background:#f5f5f5;
+    background:#fff;
+    color:#222;
 }
 
+/* カテゴリ */
 #category{
-    display:flex;
-    background:#ffffff;
-    border-bottom:1px solid #ccc;
     position:sticky;
     top:0;
+    display:flex;
+    overflow-x:auto;
+    white-space:nowrap;
+    background:#fff;
+    border-bottom:2px solid #2e7d32;
+    scrollbar-width:none;
+}
+
+#category::-webkit-scrollbar{
+    display:none;
 }
 
 #category button{
-    flex:1;
-    padding:15px;
+    flex:none;
     border:none;
     background:#fff;
+    color:#2e7d32;
+    padding:14px 22px;
     font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 #category button.active{
-    background:#d32f2f;
+    background:#2e7d32;
     color:#fff;
 }
 
+/* メイン */
 main{
-    padding:15px;
+    padding:16px;
 }
 
+/* リンクカード */
 .card{
-    background:#fff;
-    border-radius:10px;
-    margin-bottom:12px;
-    box-shadow:0 2px 5px rgba(0,0,0,.15);
+    border:1px solid #ddd;
+    border-left:6px solid #2e7d32;
+    border-radius:8px;
+    margin-bottom:14px;
+    overflow:hidden;
 }
 
 .card a{
     display:block;
     padding:18px;
+    color:#222;
     text-decoration:none;
-    color:#333;
-    font-size:18px;
 }
 
-.card small{
-    display:block;
-    color:#777;
-    margin-top:5px;
+.card a:hover{
+    background:#f6f6f6;
+}
+
+.title{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.desc{
+    margin-top:6px;
+    color:#2e7d32;
+    font-size:14px;
 }
 </style>
 </head>
@@ -79,40 +101,40 @@ main{
 const data={
 
 "前期":[
-    {
-        title:"第1回 オリエンテーション",
-        url:"https://www.youtube.com/watch?v=xxxxxxxx"
-    },
-    {
-        title:"第2回 基礎講義",
-        url:"https://www.youtube.com/watch?v=yyyyyyyy"
-    },
-    {
-        title:"第3回 演習",
-        url:"https://www.youtube.com/watch?v=zzzzzzzz"
-    }
+{
+title:"第1回 オリエンテーション",
+url:"https://www.youtube.com/"
+},
+{
+title:"第2回 基礎講義",
+url:"https://www.youtube.com/"
+},
+{
+title:"第3回 演習",
+url:"https://www.youtube.com/"
+}
 ],
 
 "後期":[
-    {
-        title:"第1回 応用編",
-        url:"https://www.youtube.com/watch?v=aaaaaaaa"
-    },
-    {
-        title:"第2回 実践",
-        url:"https://www.youtube.com/watch?v=bbbbbbbb"
-    }
+{
+title:"第1回 応用編",
+url:"https://www.youtube.com/"
+},
+{
+title:"第2回 実践編",
+url:"https://www.youtube.com/"
+}
 ],
 
 "その他":[
-    {
-        title:"補足資料",
-        url:"https://www.youtube.com/watch?v=cccccccc"
-    },
-    {
-        title:"Q&A",
-        url:"https://www.youtube.com/watch?v=dddddddd"
-    }
+{
+title:"補足動画",
+url:"https://www.youtube.com/"
+},
+{
+title:"Q&A",
+url:"https://www.youtube.com/"
+}
 ]
 
 };
@@ -129,33 +151,35 @@ function show(name){
         links.innerHTML+=`
         <div class="card">
             <a href="${item.url}" target="_blank">
-                📺 ${item.title}
-                <small>YouTubeを見る</small>
+                <div class="title">${item.title}</div>
+                <div class="desc">▶ YouTubeで見る</div>
             </a>
         </div>
         `;
+
     });
 
     document.querySelectorAll("#category button").forEach(btn=>{
-        btn.classList.remove("active");
-        if(btn.textContent===name){
-            btn.classList.add("active");
-        }
+        btn.classList.toggle("active",btn.textContent===name);
     });
+
 }
 
-Object.keys(data).forEach((name,i)=>{
+Object.keys(data).forEach((name,index)=>{
 
     const btn=document.createElement("button");
     btn.textContent=name;
     btn.onclick=()=>show(name);
 
-    if(i==0) btn.classList.add("active");
-
     category.appendChild(btn);
+
+    if(index===0){
+        btn.classList.add("active");
+    }
+
 });
 
-show("前期");
+show(Object.keys(data)[0]);
 
 </script>
 
