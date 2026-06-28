@@ -1,85 +1,229 @@
-index.html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>スマホ用2ペインメニュー</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moive</title>
 
 <style>
-html, body {
-    margin: 0;
-    height: 100%;
-    font-family: sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.container {
-    display: flex;
-    height: 100vh;
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    height:100vh;
+    display:flex;
+    background:#f5f5f5;
 }
 
-.menu {
-    width: 120px;
-    background: #f5f5f5;
-    border-right: 1px solid #ccc;
-    overflow-y: auto;
+/* ---------- サイドバー ---------- */
+
+nav{
+    width:240px;
+    background:#2d3748;
+    color:white;
+    overflow-y:auto;
+    flex-shrink:0;
 }
 
-.menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+nav h2{
+    padding:20px;
+    font-size:20px;
+    border-bottom:1px solid rgba(255,255,255,.15);
 }
 
-.menu li {
-    border-bottom: 1px solid #ddd;
+nav button{
+    display:block;
+    width:100%;
+    text-align:left;
+    border:none;
+    background:none;
+    color:white;
+    padding:16px 20px;
+    cursor:pointer;
+    font-size:16px;
 }
 
-.menu a {
-    display: block;
-    padding: 15px 10px;
-    text-decoration: none;
-    color: #333;
+nav button:hover{
+    background:#4a5568;
 }
 
-.menu a:hover,
-.menu a:active {
-    background: #2196F3;
-    color: white;
+nav button.active{
+    background:#3182ce;
 }
 
-.content {
-    flex: 1;
+/* ---------- メイン ---------- */
+
+main{
+    flex:1;
+    overflow:auto;
+    padding:30px;
 }
 
-.content iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+.links{
+    display:grid;
+    gap:12px;
+}
+
+.links a{
+    display:block;
+    padding:14px;
+    background:white;
+    border-radius:8px;
+    color:#333;
+    text-decoration:none;
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+
+.links a:hover{
+    background:#eef6ff;
+}
+
+/* ---------- スマホ ---------- */
+
+@media (max-width:700px){
+
+body{
+    display:block;
+}
+
+nav{
+    width:100%;
+    height:auto;
+    overflow-x:auto;
+    white-space:nowrap;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav h2{
+    display:none;
+}
+
+nav button{
+    display:inline-block;
+    width:auto;
+    padding:16px 18px;
+}
+
+main{
+    padding:20px;
+}
+
 }
 </style>
-
 </head>
+
 <body>
 
-<div class="container">
+<nav>
 
-    <nav class="menu">
-        <ul>
-            <li><a href="page1.html" target="contentFrame">ホーム</a></li>
-            <li><a href="league2026L.html" target="contentFrame">商品一覧</a></li>
-            <li><a href="page3.html" target="contentFrame">設定</a></li>
-        </ul>
-    </nav>
+<h2>カテゴリ</h2>
 
-    <div class="content">
-        <iframe
-            name="contentFrame"
-            src="league2026L.html">
-        </iframe>
-    </div>
+<button class="active" onclick="showPage('news',this)">ニュース</button>
+<button onclick="showPage('tools',this)"U-12リーグ'26前期</button>
+<button onclick="showPage('shopping',this)">U-12リーグ'26後期</button>
+<button onclick="showPage('work',this)">その他</button>
+<button onclick="showPage('hobby',this)">趣味</button>
 
+</nav>
+
+<main>
+
+<section id="news" class="page active">
+<h1>ニュース</h1>
+
+<div class="links">
+<a href="https://example.com">ニュースサイト1</a>
+<a href="https://example.com">ニュースサイト2</a>
+<a href="https://example.com">ニュースサイト3</a>
 </div>
+
+</section>
+
+<section id="tools" class="page">
+
+<h1>便利ツール</h1>
+
+<div class="links">
+<a href="#">電卓</a>
+<a href="#">変換ツール</a>
+<a href="#">画像編集</a>
+</div>
+
+</section>
+
+<section id="shopping" class="page">
+
+<h1>ショッピング</h1>
+
+<div class="links">
+<a href="#">ショップA</a>
+<a href="#">ショップB</a>
+</div>
+
+</section>
+
+<section id="work" class="page">
+
+<h1>仕事</h1>
+
+<div class="links">
+<a href="#">社内ポータル</a>
+<a href="#">勤怠</a>
+<a href="#">メール</a>
+</div>
+
+</section>
+
+<section id="hobby" class="page">
+
+<h1>menu</h1>
+
+<div class="links">
+<a href="#">写真</a>
+<a href="#">ゲーム</a>
+</div>
+
+</section>
+
+</main>
+
+<script>
+
+function showPage(id, btn){
+
+document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll("nav button").forEach(b=>{
+    b.classList.remove("active");
+});
+
+btn.classList.add("active");
+
+}
+
+</script>
 
 </body>
 </html>
