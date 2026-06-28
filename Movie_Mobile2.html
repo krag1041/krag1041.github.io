@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>リンク集</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+}
+
+/* タイトル */
+header{
+    background:#1976d2;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* カテゴリ */
+#category{
+    display:flex;
+    overflow-x:auto;
+    background:white;
+    border-bottom:1px solid #ccc;
+    position:sticky;
+    top:0;
+}
+
+#category button{
+    flex:none;
+    padding:15px 20px;
+    border:none;
+    background:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#category button.active{
+    background:#1976d2;
+    color:white;
+}
+
+/* メイン */
+main{
+    padding:15px;
+}
+
+/* カテゴリタイトル */
+h2{
+    margin-bottom:15px;
+}
+
+/* リンクカード */
+.link{
+    background:white;
+    margin-bottom:12px;
+    border-radius:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+
+.link a{
+    display:block;
+    padding:18px;
+    text-decoration:none;
+    color:#333;
+    font-size:18px;
+}
+
+.link a:hover{
+    background:#eeeeee;
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+リンク集
+</header>
+
+<div id="category"></div>
+
+<main>
+    <h2 id="title"></h2>
+    <div id="links"></div>
+</main>
+
+<script>
+
+const data = {
+
+"仕事":[
+    {
+        name:"Google",
+        url:"https://www.google.com"
+    },
+    {
+        name:"GitHub",
+        url:"https://github.com"
+    },
+    {
+        name:"社内ポータル",
+        url:"#"
+    }
+],
+
+"ニュース":[
+    {
+        name:"Yahoo!ニュース",
+        url:"https://news.yahoo.co.jp"
+    },
+    {
+        name:"NHK NEWS",
+        url:"https://www3.nhk.or.jp/news/"
+    }
+],
+
+"趣味":[
+    {
+        name:"YouTube",
+        url:"https://youtube.com"
+    },
+    {
+        name:"Amazon",
+        url:"https://amazon.co.jp"
+    }
+],
+
+"勉強":[
+    {
+        name:"Qiita",
+        url:"https://qiita.com"
+    },
+    {
+        name:"Zenn",
+        url:"https://zenn.dev"
+    }
+]
+
+};
+
+const categoryDiv=document.getElementById("category");
+const title=document.getElementById("title");
+const links=document.getElementById("links");
+
+function showCategory(name){
+
+    title.textContent=name;
+
+    links.innerHTML="";
+
+    data[name].forEach(item=>{
+
+        const div=document.createElement("div");
+        div.className="link";
+
+        div.innerHTML=`
+        <a href="${item.url}" target="_blank">
+            ${item.name}
+        </a>
+        `;
+
+        links.appendChild(div);
+
+    });
+
+    document.querySelectorAll("#category button").forEach(btn=>{
+        btn.classList.remove("active");
+        if(btn.textContent===name){
+            btn.classList.add("active");
+        }
+    });
+
+}
+
+Object.keys(data).forEach((name,index)=>{
+
+    const btn=document.createElement("button");
+    btn.textContent=name;
+
+    btn.onclick=()=>{
+        showCategory(name);
+    };
+
+    if(index===0){
+        btn.classList.add("active");
+    }
+
+    categoryDiv.appendChild(btn);
+
+});
+
+showCategory(Object.keys(data)[0]);
+
+</script>
+
+</body>
+</html>
