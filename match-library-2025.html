@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MATCHDAY / Football Archive</title>
+
+  <style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #e9e6df;
+      color: #161616;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        sans-serif;
+    }
+
+    a {
+      color: inherit;
+    }
+
+
+    /* =====================================================
+       PAGE
+    ===================================================== */
+
+    .page {
+      width: 100%;
+      overflow: hidden;
+    }
+
+
+    /* =====================================================
+       HEADER
+       Matchday magazine style
+    ===================================================== */
+
+    header {
+      background: #161616;
+      color: #f5f2ea;
+
+      padding:
+        20px 18px 0;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding-bottom: 14px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,0.22);
+
+      color: #aaa69d;
+
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+
+    .brand {
+      color: #ffffff;
+    }
+
+
+    .header-title {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding:
+        28px 0 24px;
+    }
+
+
+    .matchday {
+      margin: 0;
+
+      font-size: clamp(46px, 13vw, 108px);
+      font-weight: 900;
+
+      line-height: 0.8;
+
+      letter-spacing: -0.075em;
+    }
+
+
+    .header-mark {
+      flex-shrink: 0;
+
+      width: 74px;
+      height: 74px;
+
+      border:
+        1px solid rgba(255,255,255,0.35);
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 30px;
+    }
+
+
+    .red-bar {
+      height: 7px;
+
+      margin:
+        0 -18px;
+
+      background: #d83a2e;
+    }
+
+
+
+    /* =====================================================
+       INTRO
+    ===================================================== */
+
+    .intro {
+      max-width: 900px;
+
+      margin: 0 auto;
+
+      padding:
+        25px 18px 18px;
+    }
+
+
+    .intro-grid {
+      display: grid;
+
+      grid-template-columns:
+        1fr auto;
+
+      gap: 25px;
+
+      align-items: end;
+    }
+
+
+    .intro-title {
+      margin: 0;
+
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: 27px;
+      font-weight: 700;
+
+      line-height: 1.15;
+
+      letter-spacing: -0.03em;
+    }
+
+
+    .intro-text {
+      max-width: 440px;
+
+      margin: 10px 0 0;
+
+      color: #706e68;
+
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+
+    .edition {
+      text-align: right;
+
+      color: #8b8880;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      line-height: 1.6;
+
+      letter-spacing: 0.12em;
+    }
+
+
+
+    /* =====================================================
+       MAIN
+    ===================================================== */
+
+    main {
+      max-width: 900px;
+
+      margin: 0 auto;
+
+      padding:
+        0 18px 70px;
+    }
+
+
+
+    /* =====================================================
+       SECTION HEADER
+    ===================================================== */
+
+    .section-heading {
+      display: flex;
+
+      align-items: baseline;
+      justify-content: space-between;
+
+      padding:
+        18px 0 9px;
+
+      border-top:
+        2px solid #161616;
+
+      border-bottom:
+        1px solid #b9b5ad;
+    }
+
+
+    .section-heading h2 {
+      margin: 0;
+
+      font-size: 11px;
+      font-weight: 900;
+
+      letter-spacing: 0.18em;
+    }
+
+
+    .section-heading span {
+      color: #8b8880;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      letter-spacing: 0.08em;
+    }
+
+
+
+    /* =====================================================
+       NEW / FEATURED
+       Designed like a matchday bulletin
+    ===================================================== */
+
+    .new-section {
+      margin-bottom: 42px;
+    }
+
+
+    .new-list {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 1px;
+
+      background: #161616;
+
+      border:
+        1px solid #161616;
+    }
+
+
+    .new-card {
+      position: relative;
+
+      min-height: 225px;
+
+      padding: 20px;
+
+      background: #f5f1e8;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+    }
+
+
+    .new-card:nth-child(2n) {
+      background: #ddd9d0;
+    }
+
+
+    .new-card-top {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    .new-badge {
+      padding: 5px 8px;
+
+      background: #d83a2e;
+      color: #ffffff;
+
+      font-size: 9px;
+      font-weight: 900;
+
+      letter-spacing: 0.12em;
+    }
+
+
+    .new-index {
+      color: #99958c;
+
+      font-family: Georgia, serif;
+
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+
+    .new-card-title {
+      margin: 25px 0 7px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 23px;
+      font-weight: 700;
+
+      line-height: 1.15;
+
+      letter-spacing: -0.035em;
+    }
+
+
+    .new-card-note {
+      margin: 0;
+
+      color: #77736b;
+
+      font-size: 11px;
+
+      line-height: 1.6;
+    }
+
+
+    .new-card-bottom {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      margin-top: 22px;
+
+      padding-top: 12px;
+
+      border-top:
+        1px solid #bbb6ad;
+    }
+
+
+    .new-card-type {
+      color: #8a867e;
+
+      font-size: 8px;
+      font-weight: 800;
+
+      letter-spacing: 0.15em;
+    }
+
+
+    .watch-link {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      color: #161616;
+
+      font-size: 10px;
+      font-weight: 900;
+
+      text-decoration: none;
+
+      letter-spacing: 0.06em;
+    }
+
+
+    .watch-link .arrow {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      width: 25px;
+      height: 25px;
+
+      background: #161616;
+      color: #ffffff;
+
+      border-radius: 50%;
+
+      font-size: 9px;
+    }
+
+
+
+    /* =====================================================
+       ALL MATCHES
+    ===================================================== */
+
+    .archive-section {
+      margin-top: 10px;
+    }
+
+
+    .archive-list {
+      border-bottom:
+        2px solid #161616;
+    }
+
+
+    /* =====================================================
+       MATCH ROW
+    ===================================================== */
+
+    .match-row {
+      display: grid;
+
+      grid-template-columns:
+        62px 1fr auto;
+
+      align-items: center;
+
+      gap: 20px;
+
+      min-height: 86px;
+
+      border-bottom:
+        1px solid #bdb9b1;
+
+      text-decoration: none;
+
+      transition:
+        padding 0.15s ease,
+        background 0.15s ease;
+    }
+
+
+    .match-row:hover {
+      padding-left: 8px;
+      padding-right: 8px;
+
+      background: #dedbd3;
+    }
+
+
+    .match-row:last-child {
+      border-bottom: 0;
+    }
+
+
+    .match-number {
+      color: #a09c94;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 27px;
+      font-weight: 700;
+    }
+
+
+    .match-info {
+      min-width: 0;
+    }
+
+
+    .match-title {
+      margin: 0 0 5px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 16px;
+      font-weight: 700;
+
+      line-height: 1.3;
+    }
+
+
+    .match-note {
+      margin: 0;
+
+      color: #817e77;
+
+      font-size: 10px;
+
+      line-height: 1.5;
+    }
+
+
+    .match-action {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      color: #68655f;
+
+      font-size: 9px;
+      font-weight: 900;
+
+      letter-spacing: 0.1em;
+    }
+
+
+    .match-action-icon {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      width: 32px;
+      height: 32px;
+
+      border:
+        1px solid #aaa69e;
+
+      border-radius: 50%;
+
+      font-size: 9px;
+    }
+
+
+
+    /* =====================================================
+       EMPTY
+    ===================================================== */
+
+    .empty {
+      padding: 50px 20px;
+
+      color: #918d85;
+
+      text-align: center;
+
+      font-size: 11px;
+    }
+
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+      max-width: 900px;
+
+      margin: 0 auto;
+
+      padding:
+        25px 18px 45px;
+
+      border-top:
+        1px solid #aaa69e;
+
+      color: #918d85;
+
+      font-size: 8px;
+      font-weight: 800;
+
+      letter-spacing: 0.18em;
+    }
+
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 600px) {
+
+      header {
+        padding-top: 16px;
+      }
+
+
+      .topline {
+        font-size: 8px;
+      }
+
+
+      .header-title {
+        padding:
+          25px 0 22px;
+      }
+
+
+      .matchday {
+        font-size: 55px;
+      }
+
+
+      .header-mark {
+        width: 55px;
+        height: 55px;
+
+        font-size: 22px;
+      }
+
+
+      .intro {
+        padding:
+          22px 16px 16px;
+      }
+
+
+      .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+
+      .intro-title {
+        font-size: 24px;
+      }
+
+
+      .edition {
+        text-align: left;
+      }
+
+
+      main {
+        padding:
+          0 12px 55px;
+      }
+
+
+      .new-list {
+        grid-template-columns: 1fr;
+      }
+
+
+      .new-card {
+        min-height: 205px;
+      }
+
+
+      .new-card-title {
+        font-size: 21px;
+      }
+
+
+      .match-row {
+        grid-template-columns:
+          38px 1fr 32px;
+
+        gap: 11px;
+
+        min-height: 78px;
+      }
+
+
+      .match-number {
+        font-size: 20px;
+      }
+
+
+      .match-title {
+        font-size: 14px;
+      }
+
+
+      .match-note {
+        font-size: 9px;
+      }
+
+
+      .match-action-text {
+        display: none;
+      }
+
+
+      .match-action-icon {
+        width: 30px;
+        height: 30px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+  <!-- =====================================================
+       HEADER
+  ===================================================== -->
+
+  <header>
+
+    <div class="header-inner">
+
+      <div class="topline">
+
+        <span class="brand">
+          FOOTBALL ARCHIVE
+        </span>
+
+        <span>
+          MATCHDAY / VIDEO EDITION
+        </span>
+
+      </div>
+
+
+      <div class="header-title">
+
+        <h1 class="matchday">
+          MATCHDAY
+        </h1>
+
+        <div class="header-mark">
+          ⚽
+        </div>
+
+      </div>
+
+
+      <div class="red-bar"></div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       INTRO
+  ===================================================== -->
+
+  <section class="intro">
+
+    <div class="intro-grid">
+
+      <div>
+
+        <h2 class="intro-title">
+          The Match Archive 2025
+        </h2>
+
+        <p class="intro-text">
+          試合動画のアーカイブ
+        </p>
+
+      </div>
+
+
+      <div class="edition">
+        VIDEO ARCHIVE<br>
+        EST. 2025
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       MAIN
+  ===================================================== -->
+
+  <main>
+
+
+    <!-- ===================================================
+         NEW
+    =================================================== -->
+
+    <section
+      class="new-section"
+      id="newSection"
+    >
+
+      <div class="section-heading">
+
+        <h2>
+          JUST IN
+        </h2>
+
+        <span id="newCount"></span>
+
+      </div>
+
+
+      <div
+        class="new-list"
+        id="newVideoList"
+      ></div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         ALL MATCHES
+    =================================================== -->
+
+    <section class="archive-section">
+
+      <div class="section-heading">
+
+        <h2>
+          MATCH ARCHIVE
+        </h2>
+
+        <span id="videoCount"></span>
+
+      </div>
+
+
+      <div
+        class="archive-list"
+        id="videoList"
+      ></div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ===================================================== -->
+
+  <footer>
+
+    FOOTBALL ARCHIVE
+    &nbsp; / &nbsp;
+    MATCHDAY VIDEO EDITION
+
+  </footer>
+
+
+</div>
+
+
+
+<script>
+
+
+  /* ======================================================
+     VIDEO DATA
+     ======================================================
+
+     title : 試合タイトル
+     url   : YouTube URL
+     note  : メモ
+     new   : NEWに表示するなら true
+
+     ★ リストは並び替えません。
+     ★ 新しい動画は一番下に追加してください。
+
+  ====================================================== */
+
+
+  const videos = [
+
+    {
+      title: "日本代表 vs オーストラリア",
+      url: "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      note: "2026/09/16　W杯予選",
+      new: false
+    },
+
+    {
+      title: "Manchester City vs Arsenal",
+      url: "https://www.youtube.com/watch?v=YYYYYYYYYYY",
+      note: "2026/09/15　Premier League",
+      new: false
+    },
+
+    {
+      title: "Barcelona vs Real Madrid",
+      url: "https://www.youtube.com/watch?v=ZZZZZZZZZZZ",
+      note: "2026/09/12　La Liga",
+      new: false
+    },
+
+    {
+      title: "Liverpool vs Chelsea",
+      url: "https://www.youtube.com/watch?v=AAAAAAAAAAA",
+      note: "2026/09/10　Premier League",
+      new: true
+    },
+
+    {
+      title: "Inter Milan vs Juventus",
+      url: "https://www.youtube.com/watch?v=BBBBBBBBBBB",
+      note: "2026/09/08　Serie A",
+      new: true
+    },
+
+    {
+      title: "レオレオ卒団2025",
+      url: "https://youtu.be/VAYa8RVJ9vo",
+      note: "",
+      new: true
+    }
+
+  ];
+
+
+
+  /* ======================================================
+     HTML ESCAPE
+  ====================================================== */
+
+  function escapeHTML(str) {
+
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+
+  /* ======================================================
+     NEW CARD
+  ====================================================== */
+
+  function createNewCard(video, index) {
+
+    const card =
+      document.createElement("article");
+
+    card.className = "new-card";
+
+
+    card.innerHTML = `
+
+      <div>
+
+        <div class="new-card-top">
+
+          <div class="new-badge">
+            NEW
+          </div>
+
+          <div class="new-index">
+            ${String(index + 1).padStart(2, "0")}
+          </div>
+
+        </div>
+
+
+        <h3 class="new-card-title">
+          ${escapeHTML(video.title)}
+        </h3>
+
+
+        <p class="new-card-note">
+          ${escapeHTML(video.note)}
+        </p>
+
+      </div>
+
+
+      <div class="new-card-bottom">
+
+        <span class="new-card-type">
+          MATCH VIDEO
+        </span>
+
+
+        <a
+          class="watch-link"
+          href="${escapeHTML(video.url)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          WATCH
+
+          <span class="arrow">
+            ↗
+          </span>
+
+        </a>
+
+      </div>
+
+    `;
+
+
+    return card;
+
+  }
+
+
+
+  /* ======================================================
+     ARCHIVE ROW
+  ====================================================== */
+
+  function createArchiveRow(video, index) {
+
+    const row =
+      document.createElement("a");
+
+    row.className = "match-row";
+
+    row.href = video.url;
+
+    row.target = "_blank";
+
+    row.rel = "noopener noreferrer";
+
+
+    row.innerHTML = `
+
+      <div class="match-number">
+        ${String(index + 1).padStart(2, "0")}
+      </div>
+
+
+      <div class="match-info">
+
+        <h3 class="match-title">
+          ${escapeHTML(video.title)}
+        </h3>
+
+        <p class="match-note">
+          ${escapeHTML(video.note)}
+        </p>
+
+      </div>
+
+
+      <div class="match-action">
+
+        <span class="match-action-text">
+          WATCH
+        </span>
+
+        <span class="match-action-icon">
+          ↗
+        </span>
+
+      </div>
+
+    `;
+
+
+    return row;
+
+  }
+
+
+
+  /* ======================================================
+     NEW
+  ====================================================== */
+
+
+  const newVideos =
+    videos.filter(video => video.new === true);
+
+
+  const newSection =
+    document.getElementById("newSection");
+
+  const newVideoList =
+    document.getElementById("newVideoList");
+
+  const newCount =
+    document.getElementById("newCount");
+
+
+  if (newVideos.length === 0) {
+
+    newSection.style.display = "none";
+
+  } else {
+
+    newCount.textContent =
+      `${newVideos.length} FEATURED`;
+
+
+    newVideos.forEach((video, index) => {
+
+      newVideoList.appendChild(
+        createNewCard(video, index)
+      );
+
+    });
+
+  }
+
+
+
+  /* ======================================================
+     ALL MATCHES
+  ====================================================== */
+
+
+  const videoList =
+    document.getElementById("videoList");
+
+  const videoCount =
+    document.getElementById("videoCount");
+
+
+  videoCount.textContent =
+    `${videos.length} MATCHES`;
+
+
+  if (videos.length === 0) {
+
+    videoList.innerHTML = `
+      <div class="empty">
+        NO MATCHES YET
+      </div>
+    `;
+
+  } else {
+
+    videos.forEach((video, index) => {
+
+      videoList.appendChild(
+        createArchiveRow(video, index)
+      );
+
+    });
+
+  }
+
+
+</script>
+
+</body>
+
+</html>
+```
