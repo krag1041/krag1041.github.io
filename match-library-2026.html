@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Match Videos 2026</title>
+
+  <style>
+    /* =========================
+       Base
+    ========================= */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f6f7f8;
+      color: #17191c;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        sans-serif;
+    }
+
+    a {
+      color: inherit;
+    }
+
+
+    /* =========================
+       Header
+    ========================= */
+
+    header {
+      padding: 42px 20px 28px;
+
+      background: #ffffff;
+      border-bottom: 1px solid #e8e9eb;
+    }
+
+    .header-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin-bottom: 8px;
+
+      color: #7b8087;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+
+    h1 {
+      margin: 0;
+
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .description {
+      margin: 10px 0 0;
+
+      color: #777c83;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+
+    /* =========================
+       Main
+    ========================= */
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px 16px 60px;
+    }
+
+
+    /* =========================
+       Section
+    ========================= */
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      margin: 0 4px 12px;
+
+      color: #8a8f96;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    .section-header .badge {
+      display: inline-block;
+
+      padding: 4px 7px;
+
+      border-radius: 5px;
+
+      background: #FF7F7F;
+      color: #ffffff;
+
+      font-size: 9px;
+      letter-spacing: 0.08em;
+    }
+
+
+    /* =========================
+       Video List
+    ========================= */
+
+    .video-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+
+    /* =========================
+       Video Card
+    ========================= */
+
+    .video-card {
+      padding: 18px;
+
+      background: #ffffff;
+      border: 1px solid #e7e8ea;
+      border-radius: 14px;
+
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .video-title {
+      margin: 0 0 8px;
+
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .video-note {
+      margin: 0 0 16px;
+
+      color: #777c83;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .video-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      padding: 9px 13px;
+
+      border-radius: 8px;
+
+      background: #17191c;
+      color: #ffffff;
+
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+
+      transition:
+        background 0.15s ease;
+    }
+
+    .video-link:hover {
+      background: #33373c;
+    }
+
+    .play-icon {
+      font-size: 10px;
+    }
+
+
+    /* =========================
+       NEW Section
+    ========================= */
+
+    .new-section {
+      margin-bottom: 44px;
+    }
+
+    .new-section .video-card {
+      border-color: #d8dce1;
+
+      box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .new-section .video-card + .video-card {
+      margin-top: 10px;
+    }
+
+
+    /* =========================
+       Archive
+    ========================= */
+
+    .archive-section {
+      padding-top: 4px;
+    }
+
+    .archive-section .section-header {
+      padding-top: 4px;
+    }
+
+    .archive-section .video-list {
+      gap: 10px;
+    }
+
+
+    /* =========================
+       Empty
+    ========================= */
+
+    .empty {
+      padding: 45px 20px;
+
+      color: #999da3;
+
+      text-align: center;
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       Footer
+    ========================= */
+
+    footer {
+      padding: 30px 20px 40px;
+
+      color: #a0a4aa;
+
+      text-align: center;
+      font-size: 11px;
+    }
+
+
+    /* =========================
+       Mobile
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 34px 18px 24px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      main {
+        padding: 22px 12px 50px;
+      }
+
+      .video-card {
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .video-title {
+        font-size: 15px;
+      }
+
+      .video-link {
+        width: 100%;
+        padding: 11px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       Header
+  ========================== -->
+
+  <header>
+
+    <div class="header-inner">
+
+      <div class="eyebrow">
+        FOOTBALL VIDEO ARCHIVE
+      </div>
+
+      <h1>
+        Match Videos 2026
+      </h1>
+
+      <p class="description">
+        試合動画のまとめ。
+      </p>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =========================
+       Main
+  ========================== -->
+
+  <main>
+
+
+    <!-- =========================
+         NEW
+    ========================== -->
+
+    <section
+      class="section new-section"
+      id="newSection"
+    >
+
+      <div class="section-header">
+        <span class="badge">NEW</span>
+        LATEST MATCHES
+      </div>
+
+      <div
+        class="video-list"
+        id="newVideoList"
+      ></div>
+
+    </section>
+
+
+
+    <!-- =========================
+         ALL MATCHES
+    ========================== -->
+
+    <section
+      class="section archive-section"
+    >
+
+      <div class="section-header">
+        ALL MATCHES
+      </div>
+
+      <div
+        class="video-list"
+        id="videoList"
+      ></div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =========================
+       Footer
+  ========================== -->
+
+  <footer>
+    Football Video Archive
+  </footer>
+
+
+
+  <script>
+
+    /*
+     * ==================================================
+     * 動画リスト
+     * ==================================================
+     *
+     * title : 試合タイトル
+     * url   : YouTube URL
+     * note  : メモ
+     * new   : NEWに表示するかどうか
+     *
+     * --------------------------------------------------
+     * 運用方法
+     * --------------------------------------------------
+     *
+     * 新しい動画を追加するときは、
+     * このリストの一番下に追加していけばOKです。
+     *
+     * NEWに表示したい動画だけ
+     *
+     *     new: true
+     *
+     * にしてください。
+     *
+     * NEWから外す場合は
+     *
+     *     new: false
+     *
+     * に変更します。
+     *
+     */
+
+
+    const videos = [
+
+      {
+        title: "2026.4.11 スプリングフェスティバル① vs水原（前半）",
+        url: "https://youtu.be/kqofXTCREPQ",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.11 スプリングフェスティバル① vs水原（後半）",
+        url: "https://youtu.be/pOyNAV43F3E",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.11 スプリングフェスティバル② vsFC rosso（前半）",
+        url: "https://youtu.be/ZS_uFbjcbKo",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.11 スプリングフェスティバル② vsFC rosso（後半）",
+        url: "https://youtu.be/0UQM-SIYySU",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.11 スプリングフェスティバル フレンドリー vs南浜（前半）",
+        url: "https://youtu.be/mfMA5QMOcFM",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.11 スプリングフェスティバル フレンドリー vs南浜（後半）",
+        url: "https://youtu.be/SbhZFp-q-RQ",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.11 スプリングフェスティバル ③ vsNoedegrati（前半）",
+        url: "https://youtu.be/Xkxiimzo8uo",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.11 スプリングフェスティバル ③ vsNoedegrati（後半）",
+        url: "https://youtu.be/nTlKrJzSNXw",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.11 スプリングフェスティバル フレンドリー vs東青山",
+        url: "https://youtu.be/R7nYdNG4m-I",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.12 スプリングフェスティバル ①vs 青山",
+        url: "https://youtu.be/thJQjNF9iiA",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.12 スプリングフェスティバル ②vs 前橋",
+        url: "https://youtu.be/cQR1WT1w3A4",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.12 スプリングフェスティバル ③vs 三条SSS",
+        url: "https://youtu.be/KWVFAD6nL90",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.18 N2aリーグ第１節 vs松浜",
+        url: "https://youtu.be/J-uYZH1ANzo",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.18 N2aリーグ第１節 vsフリーダム",
+        url: "https://youtu.be/hW2c1zHZqbI",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.25 N2aリーグ第２節 vs豊照",
+        url: "https://youtu.be/FC7wHahmfrM",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.25_N2aリーグ第２節 vsUNITE②",
+        url: "https://youtu.be/m7jKECDqk5c",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.29 N2aリーグ第３節 vs青山",
+        url: "https://youtu.be/Y7FWLr7XbSw",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.4.29 N2aリーグ第３節 vs女池",
+        url: "https://youtu.be/mvg1AfiCPLE",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.3 久藤杯 予選リーグ① vs安宅",
+        url: "https://youtu.be/7XJqp6z4qZs",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.3 久藤杯 予選リーグ② vs泉",
+        url: "https://youtu.be/Szd6Wd3EWd0",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.3 久藤杯 予選リーグ③ vs小松南部",
+        url: "https://youtu.be/Oa9byjQhUZE",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.4 会長杯 決勝リーグ進出決定戦 vs仲良し",
+        url: "https://youtu.be/JCM2Ph6wgZo",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.4 会長杯 決勝リーグ① vs富樫",
+        url: "https://youtu.be/bzgCVVGZGMI",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.4 会長杯 決勝リーグ② vs根上",
+        url: "https://youtu.be/XOdq-2p6S1U",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.4 会長杯 決勝戦 vs第一翼スポーツ少年団",
+        url: "https://youtu.be/oslmaQiEe2I",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.6 N2aリーグ第4節 vs浜浦",
+        url: "https://youtu.be/vW9tHZgRUH4",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.10 N2aリーグ第5節 vs早通",
+        url: "https://youtu.be/8d43PvAecZA",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.10 N2aリーグ第5節 vs佐渡",
+        url: "https://youtu.be/586M2g7797o",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.11 N2aリーグ第5節ゴール集",
+        url: "https://youtu.be/pf6IM_N34rA",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.5.31 後期N2aリーグ第1節 vs白根ジャガーズ",
+        url: "https://youtu.be/wzfKPcLXXeA",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.6.27 後期N2aリーグ第3節 vsROSSO",
+        url: "https://youtu.be/mxdgOw9ENK0",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.6.27 後期N2aリーグ第3節 vs東青山",
+        url: "https://youtu.be/8GW0DvqLBLY",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.6.28 後期N2aリーグ第2節 vsFC早通",
+        url: "https://youtu.be/xhej322n_Vg",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.6.28 後期N2aリーグ第2節 vsUNITE 2nd",
+        url: "https://youtu.be/v_3S8DJZmCg",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.7.5 サンクスフェスタ　Aブロック① vs 石井フットボールクラブ",
+        url: "https://youtu.be/IK_pPakfplk",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.7.5 サンクスフェスタ　Aブロック② vs AFC94ジュニア",
+        url: "https://youtu.be/SCfdQAmQ7V8",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.7.5 サンクスフェスタ　Aブロック③ vs パストゥーディオ新潟FC&FC西内野",
+        url: "https://youtu.be/nJgCR7O1ydI",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.7.5 サンクスフェスタ　3位トーナメント① vs 新通イーグルス",
+        url: "https://youtu.be/eCGV0uJUjKw",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.7.5 サンクスフェスタ　3位トーナメント決勝 vs 内野ジュニアサッカークラブ",
+        url: "https://youtu.be/fr3OzXMb6vU",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.7.18 はまなすカップ予選L① vs HFC",
+        url: "https://youtu.be/TjECpHQEDMo",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.7.18 はまなすカップ予選L② vs プリマJaN",
+        url: "https://youtu.be/331DPQx8ta8",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.7.18 はまなすカップ予選L③ vs 大和ジュニオルス",
+        url: "https://youtu.be/m8HFTbUJh3c",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.7.19 はまなすカップ交流トーナメント① vs糸魚川",
+        url: "https://youtu.be/yeMRI33jOu8",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.7.19 はまなすカップ交流トーナメント② vsがむしゃら",
+        url: "https://youtu.be/UHfXuJIR_CI",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.7.19 はまなすカップ交流トーナメント③ vs東青山",
+        url: "https://youtu.be/LqIke3LHONQ",
+        note: "",
+        new: false
+      },
+
+      {
+        title: "2026.8.29 サルビア交流会 ゴールシーン",
+        url: "https://youtu.be/oSBio2ydyqU",
+        note: " ",
+        new: false
+      },
+
+      {
+        title: "2026.9.13 U-12リーグ プラスワン vs bandai12",
+        url: "https://youtu.be/onwuGyadook",
+        note: "12'51 そうま",
+        new: true
+      },
+
+      {
+        title: "2026.9.13 U-12リーグ プラスワン vs 浜浦コスモス",
+        url: "https://youtu.be/5nkO4L3W9BM",
+        note: "3'35 やまと　7'32 さく　8'20 さく　39'43 さく　41'45 るい",
+        new: true
+      },
+
+      {
+        title: "temp",
+        url: "https://google.com",
+        note: " ",
+        new: false
+      }
+
+    ];
+
+
+
+    /*
+     * ==================================================
+     * HTMLエスケープ
+     * ==================================================
+     */
+
+    function escapeHTML(str) {
+
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+
+    /*
+     * ==================================================
+     * 動画カードを作る
+     * ==================================================
+     */
+
+    function createVideoCard(video) {
+
+      const card = document.createElement("article");
+
+      card.className = "video-card";
+
+      card.innerHTML = `
+
+        <h2 class="video-title">
+          ${escapeHTML(video.title)}
+        </h2>
+
+        <p class="video-note">
+          ${escapeHTML(video.note)}
+        </p>
+
+        <a
+          class="video-link"
+          href="${escapeHTML(video.url)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="play-icon">▶</span>
+          YouTubeで見る
+        </a>
+
+      `;
+
+      return card;
+
+    }
+
+
+
+    /*
+     * ==================================================
+     * NEW リスト
+     * ==================================================
+     *
+     * new: true のものだけを抜き出します。
+     *
+     * 元の videos の順番は変更しません。
+     *
+     */
+
+    const newVideos =
+      videos.filter(video => video.new === true);
+
+
+
+    /*
+     * ==================================================
+     * NEW を表示
+     * ==================================================
+     */
+
+    const newVideoList =
+      document.getElementById("newVideoList");
+
+    const newSection =
+      document.getElementById("newSection");
+
+
+    if (newVideos.length === 0) {
+
+      /*
+       * NEWが0件なら、
+       * NEWセクション自体を非表示にします。
+       */
+
+      newSection.style.display = "none";
+
+    } else {
+
+      newVideos.forEach(video => {
+
+        newVideoList.appendChild(
+          createVideoCard(video)
+        );
+
+      });
+
+    }
+
+
+
+    /*
+     * ==================================================
+     * 全リストを表示
+     * ==================================================
+     *
+     * こちらは videos の順番を
+     * そのまま維持します。
+     *
+     */
+
+    const videoList =
+      document.getElementById("videoList");
+
+
+    if (videos.length === 0) {
+
+      videoList.innerHTML = `
+        <div class="empty">
+          動画はまだありません。
+        </div>
+      `;
+
+    } else {
+
+      videos.forEach(video => {
+
+        videoList.appendChild(
+          createVideoCard(video)
+        );
+
+      });
+
+    }
+
+  </script>
+
+</body>
+
+</html>
+```
