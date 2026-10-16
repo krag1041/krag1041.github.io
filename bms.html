@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>入力表</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 600px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 6px;
+      height: 36px;
+    }
+
+    th {
+      background: #eeeeee;
+    }
+
+    input[type="text"] {
+      box-sizing: border-box;
+      width: 100%;
+      border: none;
+      outline: none;
+      padding: 6px 2px;
+      font-size: 14px;
+    }
+
+    .check-cell {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<h2>入力表</h2>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>概要</th>
+        <th>収入</th>
+        <th>支出</th>
+        <th>チェック</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+</div>
+
+<script>
+  const tbody = document.getElementById("table-body");
+
+  // チェック項目はここで直接設定
+  const checkItems = [
+    "確認1",
+    "確認2",
+    "確認3",
+    "確認4",
+    "確認5",
+    "確認6",
+    "確認7",
+    "確認8",
+    "確認9",
+    "確認10",
+    "確認11",
+    "確認12",
+    "確認13",
+    "確認14",
+    "確認15",
+    "確認16",
+    "確認17",
+    "確認18",
+    "確認19",
+    "確認20"
+  ];
+
+  for (let i = 0; i < 20; i++) {
+    const tr = document.createElement("tr");
+
+    // 概要・収入・支出の入力欄
+    for (let j = 0; j < 3; j++) {
+      const td = document.createElement("td");
+      const input = document.createElement("input");
+
+      input.type = "text";
+      input.placeholder = "入力...";
+      td.appendChild(input);
+      tr.appendChild(td);
+    }
+
+    // ソースで定義したチェック項目
+    const td = document.createElement("td");
+    td.className = "check-cell";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.setAttribute("aria-label", checkItems[i]);
+
+    const label = document.createElement("label");
+    label.appendChild(checkbox);
+    label.appendChild(
+      document.createTextNode(" " + checkItems[i])
+    );
+
+    td.appendChild(label);
+    tr.appendChild(td);
+
+    tbody.appendChild(tr);
+  }
+</script>
+
+</body>
+</html>
